@@ -1,5 +1,5 @@
 main.name = ""
-main.lang = "en"
+main.lang = "zh"
 main.confd = "/etc/pwnagotchi/conf.d/"
 main.custom_plugins = ""
 main.custom_plugin_repos = [
@@ -198,7 +198,7 @@ ui.web.on_frame = ""
 
 ui.display.enabled = true
 ui.display.rotation = 180
-ui.display.type = "waveshare_2"
+ui.display.type = "waveshare_3"
 ui.display.color = "black"
 
 bettercap.scheme = "http"

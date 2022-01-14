@@ -1,16 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <511225068@qq.com>, 2019.
-# 还有很多未翻译和翻译不准确，后期希望大家加入进来一起翻译！
-# 翻译可以联系QQ群：959559103 找 名字叫 初九 的 管理员
+
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-10-23 20:56+0200\n"
-"PO-Revision-Date: 2019-11-02 10:00+0008\n"
-"Last-Translator: 极客之眼-初九 <511225068@qq.com>\n"
+"PO-Revision-Date: 2022-1-12 10:00+0008\n"
+"Last-Translator: LordCasser\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: chinese\n"
 "MIME-Version: 1.0\n"
@@ -40,7 +38,7 @@ msgstr "创建密钥中, 请勿断电..."
 
 #, python-brace-format
 msgid "Hey, channel {channel} is free! Your AP will say thanks."
-msgstr "嘿，频道{channel}是免费的！你的AP会说谢谢。"
+msgstr "嘿，频段{channel}是空闲的！快说谢谢Pwn哥。"
 
 msgid "I'm bored ..."
 msgstr "我无聊了..."
@@ -64,10 +62,10 @@ msgid "I'm sad"
 msgstr "我伤心了"
 
 msgid "I'm living the life!"
-msgstr ""
+msgstr "充实的一天"
 
 msgid "I pwn therefore I am."
-msgstr ""
+msgstr "我Pwn故我在"
 
 msgid "So many networks!!!"
 msgstr "哇，好多猎物!!!"
@@ -155,11 +153,11 @@ msgstr "正在连接到{what}"
 
 #, python-brace-format
 msgid "Yo {what}!"
-msgstr "追踪到你了{what}!"
+msgstr "抓到你了{what}!"
 
 #, python-brace-format
 msgid "Just decided that {mac} needs no WiFi!"
-msgstr "猎物{mac}不需要联网，我们给它断开!"
+msgstr "{mac}，猎物是不需要联网"
 
 #, python-brace-format
 msgid "Deauthenticating {mac}"
@@ -182,7 +180,7 @@ msgstr "行动,额等等有点小问题... 重启ing ..."
 
 #, python-brace-format
 msgid "Kicked {num} stations\n"
-msgstr "限制了{num}个猎物\n"
+msgstr "干掉了{num}个猎物\n"
 
 #, python-brace-format
 msgid "Made {num} new friends\n"
@@ -193,11 +191,11 @@ msgid "Got {num} handshakes\n"
 msgstr "捕获了{num}握手包\n"
 
 msgid "Met 1 peer"
-msgstr "有{num}同龄人"
+msgstr "遇到个朋友"
 
 #, python-brace-format
 msgid "Met {num} peers"
-msgstr ""
+msgstr "遇到了{num}个朋友"
 
 #, python-brace-format
 msgid ""
