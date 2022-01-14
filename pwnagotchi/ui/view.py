@@ -360,14 +360,10 @@ class View(object):
         self.set('status', self._voice.custom(text))
         self.update()
 
+        
     def update(self, force=False, new_data={}):
         for key, val in new_data.items():
             self.set(key, val)
-
-        with self._lock:
-            if self._frozen:
-                return
-
             state = self._state
             changes = state.changes(ignore=self._ignore_changes)
             if force or len(changes):

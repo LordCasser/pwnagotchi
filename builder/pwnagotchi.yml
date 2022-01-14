@@ -7,13 +7,17 @@
       hostname: "{{ lookup('env', 'PWN_HOSTNAME') | default('pwnagotchi', true) }}"
       version: "{{ lookup('env', 'PWN_VERSION') | default('master', true) }}"
     system:
-      boot_options:
+      boot_options4:
+        - "dtoverlay=disable-wifi"
+        - "arm_freq=800"
+      boot_optionsall:
         - "dtoverlay=dwc2"
         - "dtoverlay=spi1-3cs"
         - "dtparam=spi=on"
         - "dtparam=i2c_arm=on"
         - "dtparam=i2c1=on"
         - "gpu_mem=16"
+        
       modules:
         - "i2c-dev"
     services:
@@ -36,10 +40,10 @@
         - dnsmasq.service
     packages:
       bettercap:
-        url: "https://github.com/bettercap/bettercap/releases/download/v2.31.0/bettercap_linux_armhf_v2.31.0.zip"
-        ui: "https://github.com/bettercap/ui/releases/download/v1.3.0/ui.zip"
+        url: "https://github.com.cnpmjs.org/bettercap/bettercap/releases/download/v2.31.1/bettercap_linux_armhf_v2.31.1.zip"
+        ui: "https://github.com.cnpmjs.org/bettercap/ui/releases/download/v1.3.0/ui.zip"
       pwngrid:
-        url: "https://github.com/evilsocket/pwngrid/releases/download/v1.10.3/pwngrid_linux_armhf_v1.10.3.zip"
+        url: "https://github.com.cnpmjs.org/evilsocket/pwngrid/releases/download/v1.10.3/pwngrid_linux_armhf_v1.10.3.zip"
       apt:
         hold:
           - firmware-atheros
@@ -53,6 +57,7 @@
           - triggerhappy
           - wpa_supplicant
           - nfs-common
+          - python2*
         install:
           - rsync
           - vim
@@ -105,6 +110,8 @@
           - fonts-ipaexfont-gothic
           - cryptsetup
           - dnsmasq
+          - python3-rpi.gpio
+          - firmware-ralink
 
   tasks:
   - name: change hostname
@@ -166,8 +173,7 @@
 
   - name: upgrade apt distro
     apt:
-      upgrade: dist
-
+      upgrade: full
   - name: install packages
     apt:
       name: "{{ packages.apt.install }}"
@@ -180,7 +186,7 @@
 
   - name: clone papirus repository
     git:
-      repo: https://github.com/repaper/gratis.git
+      repo: https://github.com.cnpmjs.org/repaper/gratis.git
       dest: /usr/local/src/gratis
     register: gratisgit
 
@@ -224,7 +230,7 @@
 
   - name: clone pwnagotchi repository
     git:
-      repo: https://github.com/evilsocket/pwnagotchi.git
+      repo: https://github.com.cnpmjs.org/LordCasser/pwnagotchi.git
       dest: /usr/local/src/pwnagotchi
     register: pwnagotchigit
 
@@ -235,7 +241,7 @@
 
   - name: clone pwnagotchi plugins repository
     git:
-      repo: https://github.com/evilsocket/pwnagotchi-plugins-contrib.git
+      repo: https://github.com.cnpmjs.org/evilsocket/pwnagotchi-plugins-contrib.git
       dest: /usr/local/share/pwnagotchi/availaible-plugins
 
   - name: fetch pwnagotchi version
@@ -289,7 +295,7 @@
 
   - name: clone bettercap caplets
     git:
-      repo: https://github.com/bettercap/caplets.git
+      repo: https://github.com.cnpmjs.org/bettercap/caplets.git
       dest: /tmp/caplets
     register: capletsgit
 
@@ -332,7 +338,7 @@
         # Add your configuration overrides on this file any configuration changes done to default.toml will be lost!
         # Example:
         # ui.display.enabled = true
-        # ui.display.type = "waveshare_2"
+        # ui.display.type = "waveshare_3"
     when: not user_config.stat.exists
 
   - name: enable ssh on boot
@@ -340,12 +346,19 @@
       path: /boot/ssh
       state: touch
 
+  - name: adjust [pi4]  /boot/config.txt
+    lineinfile:
+      dest: /boot/config.txt
+      insertafter: max_framebuffers=2
+      line: '{{ item }}'
+    with_items: "{{system.boot_options4}}"
+
   - name: adjust /boot/config.txt
     lineinfile:
       dest: /boot/config.txt
       insertafter: EOF
       line: '{{ item }}'
-    with_items: "{{system.boot_options}}"
+    with_items: "{{system.boot_optionsall}}"
 
   - name: adjust /etc/modules
     lineinfile:
