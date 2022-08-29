@@ -89,6 +89,7 @@
           - kalipi-bootloader
           - kalipi-re4son-firmware
           - kalipi-kernel-headers
+          - kali-archive-keyring
           - libraspberrypi0
           - libraspberrypi-dev
           - libraspberrypi-doc
@@ -132,6 +133,9 @@
     apt_key:
       url: https://re4son-kernel.com/keys/http/archive-key.asc
       state: present
+
+  - name: Add an apt key by id from a keyserver
+    shell: sudo apt-key adv --keyserver keys.gnupg.net --recv-keys 11764EE8AC24832F
 
   - name: Add re4son-kernel repository
     apt_repository:
