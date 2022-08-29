@@ -1,0 +1,30 @@
+name: Makefile CI/CD
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+      - "latest"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install language dependencies
+      run: sudo apt-get install -y gettext
+      
+    - name: Languages
+      run: make langs
+      
+    - name: Install
+      run: make install
+
+    - name: Image
+      run: make image
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+          files: pwnagotchi-raspbian-lite-master.zip
