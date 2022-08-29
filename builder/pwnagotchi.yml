@@ -133,7 +133,10 @@
     apt_key:
       url: https://re4son-kernel.com/keys/http/archive-key.asc
       state: present
-
+  
+  - name: update key
+    command: sudo apt-key adv --keyserver keys.gnupg.net --recv-keys 11764EE8AC24832F
+  
   - name: Add re4son-kernel repository
     apt_repository:
       repo: deb http://http.re4son-kernel.com/re4son/ kali-pi main
