@@ -134,13 +134,28 @@
   #     url: https://re4son-kernel.com/keys/http/archive-key.asc
   #     state: present
   
-  - name: update key
-    command: wget -O - https://re4son-kernel.com/keys/http/archive-key.asc | sudo apt-key add -
-  
-  - name: Add re4son-kernel repository
-    apt_repository:
-      repo: deb http://http.re4son-kernel.com/re4son/ kali-pi main
-      state: present
+  # - name: update key
+  #   get_url: 
+  #     url: https://re4son-kernel.com/keys/http/archive-key.asc #| sudo apt-key add -
+  #     dest: /tmp/archive-key.asc
+  #     mode: 0755
+
+  # - name: Add re4son-kernel repository
+  #   apt_repository:
+  #     repo: deb http://http.re4son-kernel.com/re4son/ kali-pi main
+  #     state: present
+
+  - name: One way to avoid apt_key once it is removed from your distro
+    block:
+      - name: update key
+        ansible.builtin.get_url:
+          url: https://re4son-kernel.com/keys/http/archive-key.asc
+          dest: /etc/apt/trusted.gpg.d/archive-key.asc
+
+      - name: Add re4son-kernel repository
+        ansible.builtin.apt_repository:
+        repo: "deb [signed-by=/etc/apt/trusted.gpg.d/archive-key.asc] http://http.re4son-kernel.com/re4son/ kali-pi main"
+        state: present
 
   - name: create /etc/apt/preferences.d/kali.pref
     copy:
