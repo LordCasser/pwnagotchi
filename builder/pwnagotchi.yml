@@ -134,8 +134,8 @@
   #     url: https://re4son-kernel.com/keys/http/archive-key.asc
   #     state: present
   
-  # - name: update key
-  #   command: wget -O - https://re4son-kernel.com/keys/http/archive-key.asc | sudo apt-key add -
+  - name: update key
+    command: wget -O - https://re4son-kernel.com/keys/http/archive-key.asc | sudo apt-key add -
   
   - name: Add re4son-kernel repository
     apt_repository:
