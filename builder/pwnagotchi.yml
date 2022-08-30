@@ -129,13 +129,13 @@
       line: 'ExecStart=/usr/lib/bluetooth/bluetoothd --noplugin=sap'
       state: present
 
-  - name: Add re4son-kernel repo key
-    apt_key:
-      url: https://re4son-kernel.com/keys/http/archive-key.asc
-      state: present
+  # - name: Add re4son-kernel repo key
+  #   apt_key:
+  #     url: https://re4son-kernel.com/keys/http/archive-key.asc
+  #     state: present
   
-  - name: update key
-    command: sudo apt-key adv --keyserver keys.gnupg.net --recv-keys 11764EE8AC24832F
+  # - name: update key
+  #   command: wget -O - https://re4son-kernel.com/keys/http/archive-key.asc | sudo apt-key add -
   
   - name: Add re4son-kernel repository
     apt_repository:
